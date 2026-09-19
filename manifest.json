@@ -1,0 +1,15 @@
+{
+  "Id": "com.spzt.videoshowboothbuttons",
+  "Name": "视频展台硬件按钮",
+  "Version": "1.1.0",
+  "Description": "适配视频展台硬件的 5 个物理按键（拍照/放大/缩小/旋转/开关）。硬件把按键模拟为 Ctrl+Alt+Shift+M/O/I/U/P 全局热键，本插件接收后转发到内置视频展台，替代厂商 VideoShow/HotKeyApp 软件，无需安装后者。",
+  "Author": "PrefacedCorg",
+  "EntranceAssembly": "VideoShowBoothButtons.dll",
+  "ApiVersion": "1.12.0",
+  "Icon": "",
+  "Permissions": [ "Hotkeys" ],
+  "Tags": [ "booth", "camera", "hotkey", "视频展台" ],
+  "License": "GPL-3.0-only",
+  "Url": "",
+  "SourceUrl": ""
+}
