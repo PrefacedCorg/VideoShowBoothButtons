@@ -1,0 +1,23 @@
+name: Build & Release Plugin
+
+# 复用 community 仓库的共享打包工作流（net10 分支）。
+# 它负责：还原 → Release 构建 → 产物校验（禁止 SDK/Controls/WinRT 等程序集）
+#   → 打包 .icpx（严格只含 manifest.json + 入口 dll + deps.json）→ 上传 artifact
+#   → push main 且 manifest.json 的 Version 对应 Release 不存在时，自动以 v{Version} 发版。
+#
+# 自动发版规则：改 manifest.json 的 Version 再推到 main 即可，幂等（同版本重复推不会重复发版）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: InkCanvasForClass/community/.github/workflows/plugin-build.yml@net10
+    with:
+      project: VideoShowBoothButtons.csproj
+      plugin_id: com.spzt.videoshowboothbuttons
+      plugin_name: 视频展台硬件按钮
+      plugin_description: 适配视频展台硬件的 5 个物理按键（拍照/放大/缩小/旋转/开关）。硬件把按键模拟为 Ctrl+Alt+Shift+M/O/I/U/P 全局热键，插件接收后转发到 ICC 内置视频展台，替代厂商 VideoShow/HotKeyApp 软件，并提供自定义热键设置页。
+      auto_release: true
