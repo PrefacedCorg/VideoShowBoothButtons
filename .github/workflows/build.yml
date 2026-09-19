@@ -12,6 +12,12 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# 被调用的共享工作流（plugin-build.yml）内部需要 contents: write 来创建 Release，
+# 复用 workflow_call 时调用方必须在顶层声明同等级权限，否则校验报
+# "requesting 'contents: write', but is only allowed 'contents: read'"。
+permissions:
+  contents: write
+
 jobs:
   build:
     uses: InkCanvasForClass/community/.github/workflows/plugin-build.yml@net10
