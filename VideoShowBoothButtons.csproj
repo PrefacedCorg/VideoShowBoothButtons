@@ -13,15 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- 直接引用本地 community 仓库的 SDK 源项目（含未发版的 IVideoBoothService，API 1.11.0）。
-         待 SDK 发上新版 NuGet 后可改为：PackageReference Include="InkCanvas.PluginSdk" Version="x.y.z"。
-         Private=false + ExcludeAssets=runtime：生成物不携带 SDK dll，运行时由宿主统一提供。 -->
-    <ProjectReference Include="C:\Users\PrefacedCorg\Documents\GitHub\community\InkCanvas.PluginSdk\InkCanvas.PluginSdk.csproj"
+    <!-- 经 NuGet 引用宿主 SDK（CI/分发用）。Private=false + ExcludeAssets=runtime：
+         生成物不携带 SDK dll，运行时由宿主统一提供，包内也不会出现 SDK 程序集。
+         CreateIcpx 打包与 manifest.json 复制能力由包内自带的 InkCanvas.PluginSdk.targets 注入。 -->
+    <PackageReference Include="InkCanvas.PluginSdk" Version="1.8.0.6-g569fef5e70"
                       Private="false"
                       ExcludeAssets="runtime" />
   </ItemGroup>
-  <!-- 本地开发用 ProjectReference 引 SDK 时，.targets 不会自动注入（NuGet 包才会），
-       这里手动导入以获得 CreateIcpx 打包与 manifest.json 复制能力。切回 PackageReference 后可删除此 Import。 -->
-  <Import Project="C:\Users\PrefacedCorg\Documents\GitHub\community\InkCanvas.PluginSdk\InkCanvas.PluginSdk.targets" />
 
 </Project>
